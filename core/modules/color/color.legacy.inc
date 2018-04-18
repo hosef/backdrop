@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains support for legacy Bartik Blue Lagoon colors.
@@ -13,7 +14,7 @@
  * the "Blue Lagoon" default color scheme. Because themes are not permitted
  * to alter forms or add submit handlers, this code resides in Color module.
  *
- * @see color_form_system_theme_settings_alter().
+ * @see color_form_system_theme_settings_alter()
  * @deprecated since 1.3.0
  */
 function bartik_form_system_theme_settings_alter(&$form, &$form_state) {

@@ -18,37 +18,11 @@ Backdrop.behaviors.color = {
     var locks = [];
     var focused = null;
 
-    // Add Farbtastic.
-    $(form).find('#palette').after('<div id="placeholder"></div>').addClass('color-processed');
-    var farb = $.farbtastic('#placeholder');
-
     // Decode reference colors to HSL.
     var reference = settings.color.reference;
     for (i in reference) {
       if (reference.hasOwnProperty(i)) {
         reference[i] = farb.RGBToHSL(farb.unpack(reference[i]));
-      }
-    }
-
-    // Build a preview.
-    var height = [];
-    var width = [];
-    // Loop through all defined gradients.
-    for (i in settings.gradients) {
-      if (settings.gradients.hasOwnProperty(i)) {
-         // Add element to display the gradient.
-         $('#preview').once('color').append('<div id="gradient-' + i + '"></div>');
-         var gradient = $('#preview #gradient-' + i);
-         // Add height of current gradient to the list (divided by 10).
-         height.push(parseInt(gradient.css('height'), 10) / 10);
-         // Add width of current gradient to the list (divided by 10).
-         width.push(parseInt(gradient.css('width'), 10) / 10);
-         // Add rows (or columns for horizontal gradients).
-         // Each gradient line should have a height (or width for horizontal
-         // gradients) of 10px (because we divided the height/width by 10 above).
-         for (j = 0; j < (settings.gradients[i].direction === 'vertical' ? height[i] : width[i]); ++j) {
-           gradient.append('<div class="gradient-line"></div>');
-         }
       }
     }
 
