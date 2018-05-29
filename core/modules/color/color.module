@@ -91,6 +91,11 @@ function _color_header_alter(&$variables) {
 
 /**
  * Retrieves the Color module information for a particular theme.
+ *
+ * @param string $theme The machine name of the theme being edited.
+ *
+ * @return mixed
+ *   The Config object with the color settings or FALSE if they were not found.
  */
 function color_get_info($theme) {
   static $theme_info = array();
@@ -99,12 +104,49 @@ function color_get_info($theme) {
     return $theme_info[$theme];
   }
 
-  $path = backdrop_get_path('theme', $theme);
-  $file = BACKDROP_ROOT . '/' . $path . '/color/color.inc';
-  if ($path && file_exists($file)) {
-    include $file;
-    $theme_info[$theme] = $info;
-    return $info;
+  $config = config($theme . '.color');
+  if ($config->isNew()) {
+    // Try to get the settings from color.inc
+    $path = backdrop_get_path('theme', $theme);
+    $file = BACKDROP_ROOT . '/' . $path . '/color/color.inc';
+    if ($path && file_exists($file)) {
+      include $file;
+
+      // Create config files for the color schemes.
+      $schemes = array();
+      foreach ($info['schemes'] as $id => $scheme) {
+        $scheme_config = config($theme . '.color.scheme.' . $id);
+        $scheme_config->setData($scheme);
+        $scheme_config->save();
+        $schemes[] = $id;
+      }
+
+      // Set color config values from the $info array().
+      foreach ($info as $id => $value) {
+        if ($id == 'schemes') {
+          $value = $schemes;
+        }
+        $config->set($id, $value);
+      }
+
+      // Set color config values from the theme settings.
+      $theme_settings = config($theme . '.settings')->get('color');
+      $config->set('palette', $theme_settings['palette']);
+      $config->set('stylesheets', $theme_settings['stylesheets']);
+      $config->set('files', $theme_settings['files']);
+
+      $config->save();
+      $theme_info[$theme] = $config;
+      return $theme_info[$theme];
+    }
+    else {
+      $theme_info[$theme] = FALSE;
+      return FALSE;
+    }
+  }
+  else {
+    $theme_info[$theme] = $config;
+    return $theme_info[$theme];
   }
 }
 
