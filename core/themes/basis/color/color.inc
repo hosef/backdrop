@@ -16,6 +16,7 @@ $info = array(
     'borders' => t('Borders'),
     'formfocusborder' => t('Form element borders when selected'),
     'buttons' => t('Buttons and Breadcrumb'),
+    'drop' => t('Drop'),
   ),
   // Pre-defined color schemes.
   'schemes' => array(
@@ -35,6 +36,7 @@ $info = array(
         'borders' => '#bbbbbb',
         'formfocusborder' => '#43afe4',
         'buttons' => '#dee2ea',
+        'drop' => '#100f0d',
       ),
     ),
   ),
