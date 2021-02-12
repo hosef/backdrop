@@ -774,6 +774,8 @@ class FieldUIManageDisplayTestCase extends FieldUITestCase {
  * Tests custom widget hooks and callbacks on the field administration pages.
  */
 class FieldUIAlterTestCase extends BackdropWebTestCase {
+  protected $profile = 'standard';
+
   function setUp() {
     parent::setUp(array('field_test'));
 

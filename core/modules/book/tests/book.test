@@ -10,6 +10,8 @@
  */
 class BookTestCase extends BackdropWebTestCase {
 
+  protected $profile = 'standard';
+
   /**
    * A book node.
    *

@@ -6,6 +6,9 @@
  */
 
 class BlockTestCase extends BackdropWebTestCase {
+
+  protected $profile = 'standard';
+
   protected $admin_user;
 
   function setUp() {

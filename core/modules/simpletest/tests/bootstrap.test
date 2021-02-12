@@ -731,6 +731,11 @@ class BootstrapDestinationTestCase extends BackdropWebTestCase {
  */
 
 class WatchdogTestCase extends BackdropWebTestCase {
+
+  function setUp() {
+    parent::setUp('dblog');
+  }
+
   /**
    * Verify a log entry was entered.  Called in the same way of theme
    * expected original watchdog() execution.

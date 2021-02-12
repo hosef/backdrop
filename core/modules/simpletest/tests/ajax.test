@@ -412,6 +412,8 @@ class AJAXFormValuesTestCase extends AJAXTestCase {
  * Tests that Ajax-enabled forms work when multiple instances of the same form are on a page.
  */
 class AJAXMultiFormTestCase extends AJAXTestCase {
+  protected $profile = 'standard';
+
   function setUp() {
     parent::setUp(array('form_test'));
 

@@ -8,6 +8,9 @@
  * Views UI wizard tests.
  */
 class ViewsUIWizardHelper extends BackdropWebTestCase {
+
+  protected $profile = 'standard';
+
   function setUp() {
     // Enable views_ui.
     parent::setUp('views_ui');
