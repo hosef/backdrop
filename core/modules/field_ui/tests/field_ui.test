@@ -8,6 +8,8 @@
  * Provides common functionality for the Field UI test classes.
  */
 class FieldUITestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected $type;
   protected $hyphen_type;
 
@@ -549,6 +551,8 @@ class FieldUIManageFieldsTestCase extends FieldUITestCase {
  * Tests the functionality of the 'Manage displays' screens.
  */
 class FieldUIManageDisplayTestCase extends FieldUITestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp(array('search', 'field_test'));
   }

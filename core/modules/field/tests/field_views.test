@@ -106,7 +106,7 @@ class FieldViewsDataTest extends FieldViewsTestHelper {
   var $fields;
 
   function setUp() {
-    parent::setUp();
+    parent::setUp('comment');
 
     $langcode = LANGUAGE_NONE;
 
@@ -270,6 +270,8 @@ class FieldViewsDataTest extends FieldViewsTestHelper {
  *   Check revisions
  */
 class FieldViewsFieldTest extends FieldViewsTestHelper {
+  protected $profile = 'standard';
+
   public $nodes;
 
   protected function setUp() {
@@ -308,6 +310,7 @@ class FieldViewsFieldTest extends FieldViewsTestHelper {
       $this->nodes[$i] = $this->backdropCreateNode($edit);
     }
   }
+
   public function testFieldRender() {
     $this->_testSimpleFieldRender();
     $this->_testFormatterSimpleFieldRender();

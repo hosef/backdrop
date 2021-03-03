@@ -842,6 +842,8 @@ class CronQueueTestCase extends BackdropWebTestCase {
 }
 
 class MetaTagsTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   /**
    * Verify that the meta tag HTML is generated correctly.
    */
@@ -863,6 +865,8 @@ class MetaTagsTestCase extends BackdropWebTestCase {
  * Tests custom access denied functionality.
  */
 class AccessDeniedTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected $admin_user;
 
   function setUp() {
@@ -954,6 +958,8 @@ class AccessDeniedTestCase extends BackdropWebTestCase {
 }
 
 class PageNotFoundTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected $admin_user;
 
   /**

@@ -186,7 +186,7 @@ class ListDynamicValuesValidationTestCase extends ListDynamicValuesTestCase {
  */
 class ListFieldUITestCase extends FieldTestCase {
   function setUp() {
-    parent::setUp('field_test', 'field_ui');
+    parent::setUp('field_test', 'field_ui','list', 'taxonomy');
 
     // Create test user.
     $admin_user = $this->backdropCreateUser(array('access content', 'administer content types', 'administer taxonomy', 'administer fields'));

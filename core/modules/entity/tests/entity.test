@@ -9,6 +9,8 @@
  * Tests the basic Entity API.
  */
 class EntityAPITestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('entity', 'entity_test');
   }
@@ -62,6 +64,7 @@ class EntityAPITestCase extends BackdropWebTestCase {
  * Tests Entity API base functionality.
  */
 class EntityAPIInfoTestCase extends BackdropWebTestCase  {
+  protected $profile = 'testing';
   /**
    * Ensures entity info cache is updated after changes.
    */

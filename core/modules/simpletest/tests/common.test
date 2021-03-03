@@ -620,6 +620,8 @@ class CommonSizeUnitTestCase extends BackdropUnitTestCase {
  * Test backdrop_explode_tags() and backdrop_implode_tags().
  */
 class CommonAutocompleteTagsTestCase extends BackdropUnitTestCase {
+  protected $profile = 'testing';
+
   var $validTags = array(
     'Backdrop' => 'Backdrop',
     'Backdrop with some spaces' => 'Backdrop with some spaces',
@@ -1179,6 +1181,8 @@ class CommonBackdropHTTPResponseStatusLineTest extends BackdropUnitTestCase {
  * Tests backdrop_goto() and hook_backdrop_goto_alter().
  */
 class CommonBackdropGotoTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('common_test');
   }
@@ -2423,6 +2427,8 @@ class CommonValidNumberStepUnitTestCase extends BackdropUnitTestCase {
  * Tests writing of data records with backdrop_write_record().
  */
 class CommonBackdropWriteRecordTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('database_test');
   }
@@ -2551,6 +2557,7 @@ class CommonBackdropWriteRecordTestCase extends BackdropWebTestCase {
  * Tests SimpleTest error and exception collector.
  */
 class CommonSimpleTestErrorCollectorTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   /**
    * Errors triggered during the test.
@@ -2701,6 +2708,7 @@ class CommonBackdropSystemListingTestCase extends BackdropWebTestCase {
  * Tests the format_date() function.
  */
 class CommonFormatDateTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   /**
    * Arbitrary langcode for a custom language.
@@ -3120,6 +3128,8 @@ class CommonJSONUnitTestCase extends BackdropUnitTestCase {
  * Basic tests for backdrop_add_feed().
  */
 class CommonBackdropAddFeedTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   /**
    * Test backdrop_add_feed() with paths, URLs, and titles.
    */
@@ -3369,6 +3379,8 @@ class ArrayDiffUnitTest extends BackdropUnitTestCase {
  * Tests the functionality of backdrop_get_query_array().
  */
 class BackdropGetQueryArrayTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   /**
    * Tests that backdrop_get_query_array() correctly explodes query parameters.
    */
@@ -3385,6 +3397,8 @@ class BackdropGetQueryArrayTestCase extends BackdropWebTestCase {
  * Test for theme_feed_icon().
  */
 class FeedIconTest extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   /**
    * Check that special characters are correctly escaped. Test for issue #1211668.
    */

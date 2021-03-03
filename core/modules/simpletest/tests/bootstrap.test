@@ -731,6 +731,7 @@ class BootstrapDestinationTestCase extends BackdropWebTestCase {
  */
 
 class WatchdogTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   function setUp() {
     parent::setUp('dblog');

@@ -10,12 +10,14 @@ require_once BACKDROP_ROOT . '/core/modules/field/tests/field.test';
  * Tests for number field types.
  */
 class NumberFieldTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected $field;
   protected $instance;
   protected $web_user;
 
   function setUp() {
-    parent::setUp('field_test');
+    parent::setUp('field_ui', 'field_test', 'number');
     $this->web_user = $this->backdropCreateUser(array('access field_test content', 'administer field_test content', 'administer content types', 'administer fields'));
     $this->backdropLogin($this->web_user);
   }

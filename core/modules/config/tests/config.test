@@ -8,8 +8,10 @@
  * Tests reading and writing file contents.
  */
 class ConfigurationTest extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected function setUp() {
-    parent::setUp(array('config_test'));
+    parent::setUp(array('config', 'config_test'));
   }
 
   /**
@@ -191,6 +193,8 @@ class ConfigurationTest extends BackdropWebTestCase {
  * Tests hooks for validation, creating, updating, and deleting configurations.
  */
 class ConfigurationHooksTest extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected function setUp() {
     parent::setUp(array('config_test', 'config_test_hooks'));
   }
@@ -256,8 +260,10 @@ class ConfigurationHooksTest extends BackdropWebTestCase {
  * Tests the UI for syncing, importing, and exporting.
  */
 class ConfigurationUITest extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
-    parent::setUp(array('config_test'));
+    parent::setUp(array('config', 'config_test'));
 
     $this->webUser = $this->backdropCreateUser(array('synchronize configuration'));
     $this->backdropLogin($this->webUser);

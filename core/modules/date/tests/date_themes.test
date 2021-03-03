@@ -9,6 +9,7 @@
  * Testing date theme functions to render dates correctly.
  */
 class DateThemeTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   /**
    * {@inheritdoc}

@@ -8,6 +8,8 @@
  * Ajax Test.
  */
 class AJAXTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     $modules = func_get_args();
     if (isset($modules[0]) && is_array($modules[0])) {
@@ -66,8 +68,6 @@ class AJAXTestCase extends BackdropWebTestCase {
  * Tests primary Ajax framework functions.
  */
 class AJAXFrameworkTestCase extends AJAXTestCase {
-  protected $profile = 'testing';
-
   /**
    * Test that ajax_render() returns JavaScript settings generated during the page request.
    *
@@ -481,8 +481,6 @@ class AJAXMultiFormTestCase extends AJAXTestCase {
  * Test Ajax forms when page caching for anonymous users is turned on.
  */
 class AJAXFormPageCacheTestCase extends AJAXTestCase {
-  protected $profile = 'testing';
-
   public function setUp() {
     parent::setUp();
 
@@ -577,8 +575,6 @@ class AJAXElementValidation extends AJAXTestCase {
  * Tests use of dialogs as wrappers for Ajax responses.
  */
 class AJAXDialogTest extends AJAXTestCase {
-  protected $profile = 'testing';
-
   function setUp() {
     parent::setUp();
 

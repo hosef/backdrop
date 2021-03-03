@@ -7,6 +7,8 @@
 include_once(dirname(__FILE__) . '/system_config_test.inc');
 
 class FormsTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('form_test');
   }
@@ -1445,7 +1447,9 @@ class FormsFormStoragePageCacheTestCase extends BackdropWebTestCase {
 /**
  * Test cache_form.
  */
-class FormsFormCacheTestCase extends DrupalWebTestCase {
+class FormsFormCacheTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   public static function getInfo() {
     return array(
       'name' => 'Form caching',
@@ -1602,6 +1606,8 @@ class FormStateValuesCleanAdvancedTestCase extends BackdropWebTestCase {
  * @todo Add tests for other aspects of form rebuilding.
  */
 class FormsRebuildTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('form_test');
 
@@ -1951,6 +1957,8 @@ class FormsTriggeringElementTestCase extends BackdropWebTestCase {
  * Tests rebuilding of arbitrary forms by altering them.
  */
 class FormsArbitraryRebuildTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   function setUp() {
     parent::setUp('form_test');
     // Auto-create a field for testing.

@@ -9,6 +9,7 @@
  * Abstract class for views testing.
  */
 abstract class ViewsTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
   /**
    * Helper function: verify a result set returned by view.
    *
@@ -125,7 +126,13 @@ abstract class ViewsTestCase extends BackdropWebTestCase {
 
 abstract class ViewsSqlTest extends ViewsTestCase {
   protected function setUp() {
-    parent::setUp('views', 'views_ui');
+    $args = func_get_args();
+    if (isset($args[0]) && is_array($args[0])) {
+      $args = $args[0];
+    }
+    $args = array_merge($args, array('views', 'views_ui'));
+    debug($args);
+    parent::setUp($args);
 
     // Define the schema and views data variable before enabling the test module.
     state_set('views_test_schema', $this->schemaDefinition());

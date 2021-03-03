@@ -10,7 +10,10 @@ require_once BACKDROP_ROOT . '/core/modules/field/modules/list/tests/list.test';
 
 class OptionsWidgetsTestCase extends FieldTestCase {
   function setUp() {
-    parent::setUp('field_test', 'list_test');
+    parent::setUp('field_ui', 'list', 'node', 'taxonomy', 'field_test', 'list_test');
+
+    // Create a content type.
+    $this->backdropCreateContentType(array('type' => 'page'));
 
     // Field with cardinality 1.
     $this->card_1 = array(

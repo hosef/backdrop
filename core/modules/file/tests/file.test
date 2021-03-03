@@ -8,7 +8,7 @@
  * Provides methods specifically for testing File module's field handling.
  */
 class FileTestHelper extends BackdropWebTestCase {
-  protected $profile = 'standard';
+  protected $profile = 'testing';
   protected $admin_user;
 
   function setUp() {
@@ -613,6 +613,8 @@ class FileManagedFileElementTestCase extends FileTestHelper {
  * Tests file field widget.
  */
 class FileFieldWidgetTestCase extends FileTestHelper {
+  protected $profile = 'standard';
+
   /**
    * Tests upload and remove buttons for a single-valued File field.
    */
@@ -1090,6 +1092,7 @@ class FileFieldRevisionTestCase extends FileTestHelper {
    */
   function testRevisions() {
     $type_name = 'post';
+    $this->backdropCreateContentType(array('type' => $type_name));
     $field_name = strtolower($this->randomName());
     $this->createFileField($field_name, $type_name);
     $field = field_info_field($field_name);
@@ -1203,6 +1206,11 @@ class FileFieldRevisionTestCase extends FileTestHelper {
  * Tests that formatters are working properly.
  */
 class FileFieldDisplayTestCase extends FileTestHelper {
+  function setUp() {
+    parent::setUp('node', 'field', 'field_ui');
+    $this->backdropCreateContentType(array('type' => 'post'));
+  }
+
   /**
    * Tests normal formatter display on node display.
    */
@@ -1261,6 +1269,12 @@ class FileFieldDisplayTestCase extends FileTestHelper {
 class FileFieldValidateTestCase extends FileTestHelper {
   protected $field;
   protected $node_type;
+
+  public function setUp() {
+    parent::setUp('field_ui');
+    $this->backdropCreateContentType(array('type' => 'post'));
+  }
+
 
   /**
    * Tests the required property on file fields.
@@ -1447,6 +1461,7 @@ class FileFieldPathTestCase extends FileTestHelper {
   function testUploadPath() {
     $field_name = strtolower($this->randomName());
     $type_name = 'post';
+    $this->backdropCreateContentType(array('type' => $type_name));
     $field = $this->createFileField($field_name, $type_name);
     $test_file = $this->getTestFile('text');
 
@@ -1513,6 +1528,11 @@ class FileFieldPathTestCase extends FileTestHelper {
  * Tests the file token replacement in strings.
  */
 class FileTokenReplaceTestCase extends FileTestHelper {
+  public function setUp() {
+    parent::setUp('token', 'node', 'date');
+    $this->backdropCreateContentType(array('type' => 'post'));
+  }
+
   /**
    * Creates a file, then tests the tokens generated from it.
    */
@@ -1578,6 +1598,8 @@ class FileTokenReplaceTestCase extends FileTestHelper {
 class FilePrivateTestCase extends FileTestHelper {
   function setUp() {
     parent::setUp(array('node_access_test', 'field_test'));
+    $this->backdropCreateContentType(array('type' => 'page'));
+
     node_access_rebuild();
     state_set('node_access_test_private', TRUE);
 
@@ -1787,6 +1809,7 @@ class FilePrivateTestCase extends FileTestHelper {
  * Tests file type classification functionality.
  */
 class FileFileTypeClassificationTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   function setUp() {
     parent::setUp();
@@ -2471,6 +2494,7 @@ class FileUsageTestCase extends FileTestHelper {
 
   function setUp() {
     parent::setUp();
+    $this->backdropCreateContentType(array('type' => 'post'));
 
     $web_user = $this->backdropCreateUser(array('create files', 'bypass file access', 'edit own post content'));
     $this->backdropLogin($web_user);
@@ -3135,6 +3159,9 @@ class FileAccessTestCase extends FileTestHelper {
  * Tests overriding file attributes.
  */
 class FileAttributeOverrideTestCase extends FileTestHelper {
+  function setUp() {
+    parent::setUp('image');
+  }
 
   /**
    * Test to see if file attributes can be overridden.

@@ -1,6 +1,8 @@
 <?php
 
 class CacheTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
+
   protected $default_bin = 'page';
   protected $default_cid = 'test_temporary';
   protected $default_value = 'CacheTest';

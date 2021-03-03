@@ -18,6 +18,7 @@
  * hook_comment_update(), etc.
  */
 class EntityCrudHookTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   protected $ids = array();
 

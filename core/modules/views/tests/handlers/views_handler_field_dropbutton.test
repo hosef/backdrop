@@ -16,6 +16,7 @@ class ViewsHandlerFieldDropbuttonTest extends ViewsSqlTest {
    */
   public function testDropbutton() {
     // Create a node to test the listing.
+    $this->backdropCreateContentType(array('type' => 'page'));
     $node = $this->backdropCreateNode();
     $this->backdropGet('views_test/dropbutton');
     $result = $this->xpath('//ul[contains(@class, dropbutton)]/li/a[contains(@href, :path) and text()=:title]', array(':path' => url('node/' . $node->nid), ':title' => 'view'));

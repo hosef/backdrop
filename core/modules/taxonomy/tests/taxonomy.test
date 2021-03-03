@@ -8,6 +8,7 @@
  * Provides common helper methods for Taxonomy module tests.
  */
 class TaxonomyWebTestCase extends BackdropWebTestCase {
+  protected $profile = 'testing';
 
   /**
    * Returns a new vocabulary with random properties.

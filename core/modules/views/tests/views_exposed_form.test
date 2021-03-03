@@ -18,6 +18,7 @@ class ViewsExposedFormTest extends ViewsSqlTest {
     $account = $this->backdropCreateUser();
     $this->backdropLogin($account);
     // Create some random nodes.
+    $this->backdropCreateContentType(array('type' => 'page'));
     for ($i = 0; $i < 5; $i++) {
       $this->backdropCreateNode();
     }
