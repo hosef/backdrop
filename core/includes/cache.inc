@@ -774,11 +774,11 @@ class BackdropTaggableCache implements BackdropTaggableCacheInterface {
   public function getMultiple(array &$cids, $allow_invalid = FALSE) {
     $cache = array();
 
-    // @todo: remove this bebug code before merging into core.
+    // @todo: remove this debug code before merging into core.
     try {
       $cids_map = array_flip($cids);
     }
-    catch (Throwable $e) {
+    catch (Exception $e) {
       debug($e->getMessage());
     }
     if (empty($cids_map)) {
