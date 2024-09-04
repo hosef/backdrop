@@ -4772,7 +4772,7 @@ function system_transliterate_machine_name($string, $options = array()) {
 }
 
 /**
- * Implements hook_process_html().
+ * Implements hook_preprocess_page().
  */
 function system_preprocess_page(&$variables) {
   backdrop_emit_cache_tags();
@@ -4849,40 +4849,42 @@ function system_do_invalidate_cache_tags($tags) {
   if ($connection->inTransaction()) {
     throw new Exception('Must be outside of a transaction!');
   }
-  // Ensure tags are cleared in a deterministic order by sorting them first.
-  // This prevents an edge case between multiple transactions that can
-  // cause a deadlock.
-  $tags = array_unique($tags);
-  sort($tags);
 
-  $transaction = db_transaction();
-  foreach ($tags as $tag) {
-    // Only invalidate tags once per request unless they are written again.
-    if (isset($invalidated_tags[$tag])) {
-      continue;
+  if (db_table_exists('invalidated_cache_tags')) {
+    // Ensure tags are cleared in a deterministic order by sorting them first.
+    // This prevents an edge case between multiple transactions that can
+    // cause a deadlock.
+    $tags = array_unique($tags);
+    sort($tags);
+
+    $transaction = db_transaction();
+    foreach ($tags as $tag) {
+      // Only invalidate tags once per request unless they are written again.
+      if (isset($invalidated_tags[$tag])) {
+        continue;
+      }
+
+      $invalidated_tags[$tag] = TRUE;
+      unset($tag_cache[$tag]);
+      try {
+        db_merge('invalidated_cache_tags')
+          ->key(array('tag' => $tag))
+          ->fields(array('invalidations' => 1))
+          ->expression('invalidations', 'invalidations + 1')
+          ->execute();
+      } catch (Exception $e) {
+        $transaction->rollback();
+        throw $e;
+      }
     }
 
-    $invalidated_tags[$tag] = TRUE;
-    unset($tag_cache[$tag]);
-    try {
-      db_merge('invalidated_cache_tags')
-        ->key(array('tag' => $tag))
-        ->fields(array('invalidations' => 1))
-        ->expression('invalidations', 'invalidations + 1')
-        ->execute();
-    }
-    catch (Exception $e) {
-      $transaction->rollback();
-      throw $e;
-    }
-  }
+    // Commit the transaction.
+    unset($transaction);
 
-  // Commit the transaction.
-  unset($transaction);
-
-  // Ensure the cache tags cache is invalidated too.
-  foreach ($tags as $tag) {
-    _system_cache_tags_invalidate_cache($tag);
+    // Ensure the cache tags cache is invalidated too.
+    foreach ($tags as $tag) {
+      _system_cache_tags_invalidate_cache($tag);
+    }
   }
 }
 

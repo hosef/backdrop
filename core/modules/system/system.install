@@ -3657,7 +3657,7 @@ function system_update_1097() {
 /**
  * Creates database tables and config items for cache tags if they do not exist.
  */
-function system_update_1096() {
+function system_update_1098() {
   $schema = system_schema();
 
   if (!db_table_exists('invalidated_cache_tags')) {
@@ -3677,6 +3677,7 @@ function system_update_1096() {
   if ($config->get('emit_cache_tags') === NULL) {
     $config->set('emit_cache_tags', TRUE);
   }
+  $config->save();
 }
 
 /**
