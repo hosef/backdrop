@@ -773,7 +773,17 @@ class BackdropTaggableCache implements BackdropTaggableCacheInterface {
    */
   public function getMultiple(array &$cids, $allow_invalid = FALSE) {
     $cache = array();
-    $cids_map = array_flip($cids);
+
+    // @todo: remove this bebug code before merging into core.
+    try {
+      $cids_map = array_flip($cids);
+    }
+    catch (Throwable $e) {
+      debug($e->getMessage());
+    }
+    if (empty($cids_map)) {
+      return $cache;
+    }
 
     foreach ($this->backend->getMultiple($cids) as $cid => $item) {
       // This should never happen.
