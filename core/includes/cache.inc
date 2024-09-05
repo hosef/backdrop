@@ -774,22 +774,11 @@ class BackdropTaggableCache implements BackdropTaggableCacheInterface {
   public function getMultiple(array &$cids, $allow_invalid = FALSE) {
     $cache = array();
 
-    if (empty($cids)) {
-      return $cache;
-    }
-
-    // @todo: remove this debug code before merging into core.
-    try {
-      $cids_map = array_flip($cids);
-    }
-    catch (Exception $e) {
-      debug($e->getMessage());
-      return $cache;
-    }
+    $cids_map = $cids;
 
     foreach ($this->backend->getMultiple($cids) as $cid => $item) {
       // This should never happen.
-      if (!isset($cids_map[$cid])) {
+      if (!in_array($cid, $cids_map)) {
         continue;
       }
 
@@ -815,11 +804,14 @@ class BackdropTaggableCache implements BackdropTaggableCacheInterface {
       }
 
       $cache[$cid] = $item;
-      unset($cids_map[$cid]);
+
+      foreach (array_keys($cids_map, $cid) as $key) {
+        unset($cids_map[$key]);
+      }
     }
 
     // Re-calculate the cids property.
-    $cids = array_keys($cids_map);
+    $cids = $cids_map;
 
     return $cache;
   }
